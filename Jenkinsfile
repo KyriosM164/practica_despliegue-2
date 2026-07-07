@@ -7,6 +7,13 @@ pipeline {
     }
 
     stages {
+        stage('Instalar y Ejecutar Tests') {
+            steps {
+                // Instala dependencias (incluye devDependencies) y ejecuta tests
+                sh 'npm ci --silent || npm install --silent'
+                sh 'npm test'
+            }
+        }
         stage('Construir Imagen Docker') {
             steps {
                 sh 'docker build -t hola-mundo-node:latest .'
